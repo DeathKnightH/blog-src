@@ -79,6 +79,14 @@ Condition 队列中的 Node 的 nextWaiter 指向下一个 Node， 状态为 CON
 * acquire
 
 以独占模式获取资源，忽略中断。
+```
+public final void acquire(int arg) {
+  if (!tryAcquire(arg) &&
+    acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+    selfInterrupt();
+}
+```
+
 `acquire(int)` 方法内部逻辑的流程图如下：
 ![acquire](https://user-images.githubusercontent.com/19852729/124858111-09803e80-dfe0-11eb-9d6f-71cc350322d9.png)
 
@@ -90,6 +98,20 @@ Condition 队列中的 Node 的 nextWaiter 指向下一个 Node， 状态为 CON
 * release
 
 以独占模式释放资源。
+```
+public final boolean release(int arg) {
+  if (tryRelease(arg)) {
+    Node h = head;
+    if (h != null && h.waitStatus != 0)
+      unparkSuccessor(h);
+    return true;
+  }
+  return false;
+}
+```
+
+`tryRelease(int)`方法默认实现是直接抛异常，需要依赖子类实现，具体情况具体分析。
+`unparkSuccessor(Node)`方法的作用就是为了 unpark 传入参数 Node 的后继结点。比如在上面 `acquire(int)` 流程中被执行了 park 的节点。
 
 #### 2.5.2 共享方式
 * acquireShared
