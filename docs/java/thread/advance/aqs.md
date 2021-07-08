@@ -79,6 +79,14 @@ Condition 队列中的 Node 的 nextWaiter 指向下一个 Node， 状态为 CON
 * acquire
 
 以独占模式获取资源，忽略中断。
+`acquire(int)` 方法内部逻辑的流程图如下：
+![acquire](https://user-images.githubusercontent.com/19852729/124858111-09803e80-dfe0-11eb-9d6f-71cc350322d9.png)
+
+`忽略中断`体现在 `acquireQueued(Node, int)` 方法上，如果线程中断，不会立刻响应，会在获取到资源后再返还 false，`acquire(int)` 方法收到 false 返还值再调用 interrupt() 方法中断当前线程。
+`acquireQueued(Node, int)` 内部是一个无限循环，循环内的逻辑如下：
+![acquireQueued](https://user-images.githubusercontent.com/19852729/124876144-465a2e80-dffc-11eb-8514-b2aa57a9be33.png)
+
+
 * release
 
 以独占模式释放资源。
