@@ -37,7 +37,9 @@ Thread 对象的 start() 方法调用 `happens-before` 于任何发生在这个 
 ### 1.5 Thread Termination (线程终止原则)
 Thread 对象内的任何操作都 `happens-before` 于对同一个 Thread 的终止检测。
 
-终止检测，例如 Thread.join() 方法返回，又例如 Thread.isAlive() 返回 false。
+如何算终止检测？
+* Thread.join() 方法返回。
+* Thread.isAlive() 返回 false。
 
 ### 1.6 Thread Interruption (线程中断原则)
 调用 Thread 对象的 interrupt() 方法 `happens-before` 于该 Thread 对象的代码检测到中断事件发生。
@@ -48,7 +50,7 @@ Thread 对象内的任何操作都 `happens-before` 于对同一个 Thread 的�
 * 调用 isInterrupted() 方法
 
 ### 1.7 Finalizer (对象终结原则)
-对象的初始化完成 `happens-before` 于同一个对象的 finalize() 方法调用。
+对象的初始化完成（构造函数执行结束） `happens-before` 于同一个对象的 finalize() 方法调用。
 
 ### 1.8 Transitivity (传递性原则)
 以上 `happens-before` 原则具有传递性，如有3个操作 A、B、C，根据以上原则判断有 A `happens-before` B，且 B `happens-before` C，则一定有 A `happens-before` C。
