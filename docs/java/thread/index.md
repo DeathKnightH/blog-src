@@ -8,13 +8,15 @@
 * [volatile](./base/volatile.md)
 
 ### 1.2 Happens-before 原则
+* [八大原则](./base/happensbefore.md#八大原则)
+* [实例分析]()
 
 ### 1.3 线程的状态
 
 * 共有6种状态
 * 状态是怎么转移
 
-### 1.4 基础 Thread 类相关
+### 1.4 Thread 类相关
 
 * 构造线程的 3 种方式
 * ThreadLocal
@@ -38,5 +40,9 @@
 ### 2.5 Fork/Join 框架
 
 ### 2.6 常用JUC类梳理
+* ConcurrentHashMap
+* CopyOnWriteArrayList
+* 阻塞队列
+* Executors
 
 ## 3. 实战康康
