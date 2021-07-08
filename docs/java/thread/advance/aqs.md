@@ -117,9 +117,33 @@ public final boolean release(int arg) {
 * acquireShared
 
 以共享模式获取资源。
+```
+public final void acquireShared(int arg) {
+  if (tryAcquireShared(arg) < 0)
+    doAcquireShared(arg);
+}
+```
+
+`tryAcquireShared(arg)`方法默认实现是直接抛异常，需要依赖子类实现，具体情况具体分析。但是需要注意返回值的定义，`<0` 表示失败，`==0` 表示成功但是没有剩余许可，`>0` 表示成功且还有剩余许可。由此也可以看出当获取许可成功时会直接返回，失败才会进入到 `doAcquireShared(arg)` 方法。
+
+`doAcquireShared(arg)`方法用于将当前线程加入同步队列。内部逻辑和 `acquireQueued` 方法类似，区别在于当前结点获取许可成功后会去尝试继续唤醒后继结点。
+
 * releaseShared
 
 以共享模式释放资源。
+```
+public final boolean releaseShared(int arg) {
+  if (tryReleaseShared(arg)) {
+    doReleaseShared();
+    return true;
+  }
+  return false;
+}
+```
+
+`tryReleaseShared(arg)` 方法默认实现是直接抛异常，需要依赖子类实现，具体情况具体分析。
+
+`doReleaseShared()` 方法用于 unpark 后继结点。
 
 ## 3. 实际应用
 java.util.concurrent 包下提供了很多基于 AQS 实现的同步器，日常开发使用这些同步器就够用
