@@ -4,7 +4,7 @@ volatile 关键字主要有两个作用，**防止指令重排**和**保证变�
 
 ### 1.1 保证可见性的原理
 一句话概括：通过内存栅格（Memory Barrier）实现。
-https://juejin.cn/post/6876395693854949389
+参考资料：[volatile内存屏障及实现原理分析(JMM和MESI)](https://juejin.cn/post/6876395693854949389)
 
 CPU层面有三种内存栅格：
 * Load Barrier
@@ -29,7 +29,7 @@ JMM 层面的内存栅格分为四种：
 | LoadStore      | 禁止下方所有普通写和上方的 volatile 读重排          | volatile 读操作后 |
 
 如上的4种 Memory Barrier 同时也保证了 Happens-Before 原则中关于 volatile 的原则：
-[对一个 volatile 变量的写操作 happens-before 于后续对这个 volatile 变量的读操作]()
+[对一个 volatile 变量的写操作 happens-before 于后续对这个 volatile 变量的读操作](./happensbefore.md)
 
 ## 2. 应用场景
 要正确使用`volatile`关键字要满足3个条件：
