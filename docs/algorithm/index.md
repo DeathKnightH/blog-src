@@ -43,5 +43,7 @@
   * 摘要算法
   * 加密算法
 * [字符串匹配算法][]
+  * KMP
+  * Boyer–Moore string-search
 * [最短路径算法][]
 
