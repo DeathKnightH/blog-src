@@ -56,3 +56,39 @@ Thread 对象内的任何操作都 `happens-before` 于对同一个 Thread 的�
 以上 `happens-before` 原则具有传递性，如有3个操作 A、B、C，根据以上原则判断有 A `happens-before` B，且 B `happens-before` C，则一定有 A `happens-before` C。
 
 ## 2. 实例分析
+分别有3个线程 A/B/C 执行3个方法。
+
+ A 线程执行 `methodA`，B 线程执行 `methodB`， C 线程执行 `methodC` 。
+
+且 3 个线程的执行顺序为 A -> B -> C
+```
+private volatile int value = 0;
+private int a = 0;
+private int b = 0;
+
+public void methodA(int value){
+  this.value = 1;           // 1
+  synchronized(this){
+    b = a + 2;              // 2
+  }
+}
+
+public void methodB(){
+  synchronized(this){
+    int temp = this.value;  // 3 
+  }
+  this.value = b + 3;       // 4
+}
+
+public void methodC(){
+  int c = value + a;        // 5
+}
+```
+
+那么执行结果的可见顺序为 1 -> 2 -> 3 -> 4 -> 5
+
+分析如下：
+* 1 -> 2 和 3 -> 4 顺序根据单一线程原则。
+* 4 -> 5 顺序根据volatile 变量原则。
+* 2 -> 3 顺序根据管程锁定原则。
+* 最后根据传递性可以把以上3条连接起来，最终得出 1 -> 2 -> 3 -> 4 -> 5
