@@ -30,7 +30,7 @@ jobs:
     - run: npm install
     - run: npm run docs:build
     - name: Push changes
-      uses: JamesIves/github-pages-deploy-action@master
+      uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         token: ${{ secrets.DEPLOY }}
         branch: main
