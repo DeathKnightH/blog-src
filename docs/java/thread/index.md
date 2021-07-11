@@ -26,7 +26,7 @@
 ### 2.1 AQS 与同步工具
 
 * [AQS 核心原理与实现](./advance/aqs.md)
-* ReentrantLock
+* [ReentrantLock](./advance/reentrantlock.md)
 * CountDownLatch
 * Semaphore
 * CyclicBarrier
@@ -37,9 +37,12 @@
 
 ### 2.4 线程池
 
-### 2.5 Fork/Join 框架
+* [ThreadPoolExecutor](./advance/threadpool.md)
+* [ScheduledThreadPoolExecutor](./advance/threadpool.md)
 
-### 2.6 常用JUC类梳理
+* Fork/Join 框架
+
+### 2.5 常用JUC类梳理
 * ConcurrentHashMap
 * CopyOnWriteArrayList
 * 阻塞队列
