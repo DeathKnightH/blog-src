@@ -37,6 +37,7 @@
   * BFS
   * DFS
 * [摩尔投票](./leetcode/boyerMooreMajorityVote.md)
+* [计数排序](./leetcode/countingsort.md)
 
 ## 4. 专业算法
 * [安全算法]()
