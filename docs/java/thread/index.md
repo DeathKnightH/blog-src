@@ -7,9 +7,9 @@
 
 * [volatile](./base/volatile.md)
 
-### 1.2 Happens-before 原则
-* [八大原则](./base/happensbefore.md#八大原则)
-* [实例分析]()
+### [1.2 Happens-before 原则](./base/happensbefore.md)
+* 八大原则
+* 实例分析
 
 ### 1.3 线程的状态
 
@@ -31,7 +31,7 @@
 * Semaphore
 * CyclicBarrier
 
-### 2.2 CAS 与原子类
+### [2.2 CAS 与原子类](./advance/cas.md)
 * CAS
 * 原子类
 
@@ -39,10 +39,10 @@
 * LockSupport 实现细节分析
 * LockSupport 使用示例
 
-### 2.4 线程池
+### [2.4 线程池](./advance/threadpool.md)
 
-* [ThreadPoolExecutor](./advance/threadpool.md)
-* [ScheduledThreadPoolExecutor](./advance/threadpool.md)
+* ThreadPoolExecutor
+* ScheduledThreadPoolExecutor
 
 * Fork/Join 框架
 
