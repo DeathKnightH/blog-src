@@ -16,7 +16,7 @@
 * 共有6种状态
 * 状态是怎么转移
 
-### 1.4 Thread 类相关
+### [1.4 Thread 类相关](./base/thread.md)
 
 * 构造线程的 3 种方式
 * ThreadLocal
@@ -35,7 +35,7 @@
 * CAS
 * 原子类
 
-### 2.3 LockSupport
+### [2.3 LockSupport](./advance/locksupport.md)
 * LockSupport 实现细节分析
 * LockSupport 使用示例
 
