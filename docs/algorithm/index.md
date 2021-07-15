@@ -33,7 +33,7 @@
 * 回溯
 * 贪心
 * 搜索
-  * 二分
+  * [二分](./leetcode/search/binarysearch.md)
   * BFS
   * DFS
 * [摩尔投票](./leetcode/boyerMooreMajorityVote.md)
