@@ -1,6 +1,8 @@
 # 二分查找
 ## 1. 二分查找基本思路
-以在 `int` 数组中查询为例
+二分查找需要以一个有序的集合为前提。以下均以升序排列为例。
+
+代码框架，以在 `int` 数组中查询为例：
 ```
 int binarySearch(int[] nums, int target){
   int left = 0;
@@ -40,6 +42,18 @@ int binarySearch(int[] nums, int target){
   return -1;
 }
 ```
+
+需要注意3个细节：
+* right 的值以及 while 的退出条件
+* 当 target 不在搜索区间时下一个区间的变化
+  * target < current
+
+  当前区间 mid 
+  * target > current
+* 当 `target == mid` 时下一个区间的变化
+
+  因为只需要得到一个确定的 target 的位置，当 `target == mid` 时说明已经找到一个 target 的位置，可以直接返回了。
+  
 
 ### 2.2 搜索一个 target 的左边界
 ### 2.3 搜索一个 target 的右边界
