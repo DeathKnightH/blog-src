@@ -55,11 +55,14 @@ int binarySearch(int[] nums, int target){
   因为只需要得到一个确定的 target 的位置，当 `target == mid` 时说明已经找到一个 target 的位置，可以直接返回了。
   
 
-### 2.2 搜索一个 target 的左边界
-### 2.3 搜索一个 target 的右边界
-### 2.4 搜索一个最接近 target 的值
-#### 2.4.1 思路
-#### 2.4.2 习题
+### 2.2 搜索一个 target 的左/右边界
+#### 2.2.1 思路
+#### 2.2.2 习题
+* [34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+### 2.3 搜索一个最接近 target 的值
+#### 2.3.1 思路
+#### 2.3.2 习题
 * [1818. 绝对差值和](https://leetcode-cn.com/problems/minimum-absolute-sum-difference/)
 
 ## 3.小技巧
