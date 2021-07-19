@@ -24,6 +24,7 @@ int binarySearch(int[] nums, int target){
 
 ## 2. 实现细节
 ### 2.1 搜索确定的一个 target
+#### 2.1.1 思路
 ```
 int binarySearch(int[] nums, int target){
   int left = 0;
@@ -68,7 +69,9 @@ int binarySearch(int[] nums, int target){
 * 当 `target == mid` 时下一个区间的变化
 
   因为只需要得到一个确定的 target 的位置，当 `target == mid` 时说明已经找到一个 target 的位置，可以直接返回了。
-  
+
+#### 2.1.2 习题
+* [704. 二分查找](https://leetcode-cn.com/problems/binary-search/)
 
 ### 2.2 搜索一个 target 的左/右边界
 如果一个集合/数组中的元素有重复的，那么可能会找到多个 target，这时候需要确定多个 target 左/右边界的位置。
