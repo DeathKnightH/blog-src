@@ -29,7 +29,7 @@
 * [动态规划]
   * [背包问题](./leetcode/package.md)
 * 单调栈
-* 滑动窗口
+* [滑动窗口](.leetcode/slidingwindow.md)
 * 回溯
 * 贪心
 * 搜索
