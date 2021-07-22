@@ -26,12 +26,12 @@
 ## 3. 常用算法思路
 
 * [位运算](./leetcode/bit.md)
-* [动态规划]
+* 动态规划
   * [背包问题](./leetcode/package.md)
 * 单调栈
 * [双指针](./leetcode/twopointers.md)
 * [滑动窗口](./leetcode/slidingwindow.md)
-* 回溯
+* [回溯](./leetcode/backtracking.md)
 * 贪心
 * 搜索
   * [二分](./leetcode/search/binarysearch.md)
