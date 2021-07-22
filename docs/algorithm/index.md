@@ -28,6 +28,10 @@
 * [位运算](./leetcode/bit.md)
 * 动态规划
   * [背包问题](./leetcode/package.md)
+  * [斐波那契数列]
+  * [矩阵路径]
+  * [子序列]
+  * [股票交易]
 * 单调栈
 * [双指针](./leetcode/twopointers.md)
 * [滑动窗口](./leetcode/slidingwindow.md)
@@ -42,11 +46,11 @@
 * [扫描线](./leetcode/linesweep.md)
 
 ## 4. 专业算法
-* [安全算法]()
+* [安全算法]
   * 摘要算法
   * 加密算法
-* [字符串匹配算法][]
+* [字符串匹配算法]
   * KMP
   * Boyer–Moore string-search
-* [最短路径算法][]
+* [最短路径算法]
 
