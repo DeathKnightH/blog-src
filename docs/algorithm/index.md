@@ -32,6 +32,7 @@
   * [矩阵路径]
   * [子序列]
   * [股票交易]
+  * [打家劫舍]
 * 单调栈
 * [双指针](./leetcode/twopointers.md)
 * [滑动窗口](./leetcode/slidingwindow.md)
