@@ -33,9 +33,9 @@
   * [子序列]
   * [股票交易]
   * [打家劫舍]
-* [单调栈](./leetcode/monotonicsstack.md)
+* [单调栈](./leetcode/monotonicstack.md)
 * 前缀和
-* 并查集
+* [并查集](./leetcode/unionfind.md)
 * [双指针](./leetcode/twopointers.md)
 * [滑动窗口](./leetcode/slidingwindow.md)
 * [回溯](./leetcode/backtracking.md)
