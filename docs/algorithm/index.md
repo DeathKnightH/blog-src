@@ -9,7 +9,7 @@
 * 树
   * [二叉搜索树(BST)](./struct/tree/bst.md)
   * [平衡二叉搜索树]()
-  * [B树]()
+  * [B树](./struct/tree/btree.md)
   * [B+树]()
 * 栈
 * 队列
