@@ -56,4 +56,5 @@
   * KMP
   * Boyer–Moore string-search
 * [最短路径算法]
+  * [单源最短路径](./advance/singlesourceshortestpaths)
 
