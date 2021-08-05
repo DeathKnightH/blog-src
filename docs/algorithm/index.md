@@ -11,12 +11,16 @@
   * [平衡二叉搜索树]()
   * [B树](./struct/tree/btree.md)
   * [B+树]()
+* 散列表
 * 栈
 * 队列
   * [双端队列]()
   * [优先队列]()
   * [阻塞队列]()
-
+* 图
+  * [图的表示]()
+  * [BFS]
+  * [DFS]
 
 
 ## 2. 排序算法
@@ -47,6 +51,9 @@
 * [摩尔投票](./leetcode/boyerMooreMajorityVote.md)
 * [计数排序](./leetcode/countingsort.md)
 * [扫描线](./leetcode/linesweep.md)
+* [图算法]()
+  * 拓扑排序
+  * 最小生成树
 
 ## 4. 专业算法
 * [安全算法]
@@ -57,4 +64,8 @@
   * Boyer–Moore string-search
 * [最短路径算法]
   * [单源最短路径](./advance/singlesourceshortestpaths.md)
+  * [所有节点对的最短路径]()
+* [线性规划]
+* [NP完全性]
+* [多项式与快速傅里叶变换]
 
