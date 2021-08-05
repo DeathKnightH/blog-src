@@ -17,6 +17,7 @@ module.exports = {
         ],
         sidebar: 'auto',
         sidebarDepth: 2,
+        lastUpdated: 'Last Updated',
     }
 
 };
