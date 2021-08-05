@@ -8,7 +8,8 @@ module.exports = {
     themeConfig: {
         nav: [
             {text: '算法笔记', link: '/algorithm/'},
-            {text: 'Java基础', link: '/java/'}
+            {text: 'Java基础', link: '/java/'},
+            {text: '常用工具', link: '/tools/'}
         ],
         sidebar: 'auto',
         sidebarDepth: 2,
