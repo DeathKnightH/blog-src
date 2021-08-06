@@ -28,7 +28,43 @@ setDaemon(true)
 
 一个 JVM 在启动时创建的线程中，除了主线程（main 方法所在的线程），其他都是守护线程（垃圾回收线程等）。
 
-## 3. 线程间协作
+## 3. 线程中断
+线程结束有两种情况，
+* 一是线程任务执行完毕之后自动结束，
+* 二是线程执行过程中抛出异常而结束。
+
+线程中断就是利用了这两种情况。
+
+### 3.1 InterruptedException
+调用线程的 interrupt() 方法，可以中断在阻塞/等待状态的线程，抛出 InterruptedException，但是不能中断因 I/O 阻塞或者因锁阻塞的线程。
+
+### 3.2 interrupted()
+在自定义线程任务时，通过在循环或者其他长耗时的任务中插入 interrupted() 判断来检测线程是否中断来通过 return/抛异常 来及时中断长耗时任务。
+
+同时外部通过调用线程的 interrupt() 将线程状态设置为中断，使 interrupted() 方法返回 true。
+例如：
+```
+public class ThreadExample extends Thread{
+  @Override
+  public void run(){
+    while(!interrupted()){ // 判断线程状态，中断就跳出循环
+     // do somthing
+    }
+    System.out.println("Thread exit");
+  }
+}
+```
+
+```
+public static void main(String[] args){
+  Thread test = new ThreadExample();
+  test.start();
+  test.interrupt();
+}
+```
+
+
+## 4. 线程间协作
 当一个线程的运行依赖于其他线程的结果，此时简单的做法可以利用线程间协作的写法。
 
 ### join()
