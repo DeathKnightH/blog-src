@@ -38,6 +38,8 @@ setDaemon(true)
 ### 3.1 InterruptedException
 调用线程的 interrupt() 方法，可以中断在阻塞/等待状态的线程，抛出 InterruptedException，但是不能中断因 I/O 阻塞或者因锁阻塞的线程。
 
+例如：在线程中调用了 sleep()/wait() 方法使线程处于等待状态，此时外部调用此线程的 interrupt() 方法会立即中断线程运行并抛出  InterruptedException。
+
 ### 3.2 interrupted()
 在自定义线程任务时，通过在循环或者其他长耗时的任务中插入 interrupted() 判断来检测线程是否中断来通过 return/抛异常 来及时中断长耗时任务。
 
@@ -68,9 +70,15 @@ public static void main(String[] args){
 当一个线程的运行依赖于其他线程的结果，此时简单的做法可以利用线程间协作的写法。
 
 ### join()
+属于 Thread 对象，是 final 方法，不可重写。
+
 假设有两个线程 a 和 b；
 
 在 a 中调用 b.join() 会使 a 线程 **挂起** ，等到 b 线程执行完毕才会唤醒 a 线程。
 
 ### wait()/notify()/notifyAll()
+属于 Object 对象，是 final 方法，不可重写。
+
+
 ### await()/signal()/signalAll()
+属于 Condition 接口，在 AQS 类中有实现，此实现中也是 final 方法。
