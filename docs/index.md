@@ -11,6 +11,7 @@
 ## 8. [工具]()
 ### 8.1 [Maven](./tools/maven/)
 ### 8.2 [Git](./tools/git/)
+### 8.3 [IntelliJ IDEA](./tools/idea/)
 ## 9. [读书笔记]()
 ## 10. [随笔]()
 ## 11. [ToDO List]()
