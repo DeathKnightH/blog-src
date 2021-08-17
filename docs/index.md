@@ -12,6 +12,7 @@
 ### 8.1 [Maven](./tools/maven/)
 ### 8.2 [Git](./tools/git/)
 ### 8.3 [IntelliJ IDEA](./tools/idea/)
+### 8.4 [正则表达式](./tools/regularexpressions/)
 ## 9. [读书笔记]()
 ## 10. [随笔]()
 ## 11. [ToDO List]()
