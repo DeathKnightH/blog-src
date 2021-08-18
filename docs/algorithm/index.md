@@ -54,6 +54,7 @@
 * [图算法]()
   * 拓扑排序
   * 最小生成树
+* [矩阵快速幂](./leetcode/BinaryExponentiation.md)
 
 ## 4. 专业算法
 * [安全算法]
