@@ -22,7 +22,7 @@
 
   用以上代码编译出来的 class 用 `javap -v` 反编译看到的字节码如下：
 
-  ![image-20210703142233591](C:\Users\death\AppData\Roaming\Typora\typora-user-images\image-20210703142233591.png)
+  ![image-20210703142233591](synchronized.assets/image-20210703142233591.png)
 
   * monitorenter 指令发生在加锁时，使加锁对象的锁计数器 +1；
   * monitorexit 指令发生在释放锁时，使加锁对象的锁计数器 -1；
@@ -31,7 +31,7 @@
 
   enter 和 exit 的流程如下图所示：
 
-  ![image-20210703153350874](C:\Users\death\AppData\Roaming\Typora\typora-user-images\image-20210703153350874.png)
+  ![image-20210703153350874](synchronized.assets/image-20210703153350874.png)
 
 
 
