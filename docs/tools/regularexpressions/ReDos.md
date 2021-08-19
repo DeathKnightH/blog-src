@@ -18,6 +18,7 @@ ReDos 攻击会造成服务器满载（CPU占用100），此时服务器没有�
 * 写完正则使用工具检测，例如：
   * [ReScue](https://2bdenny.github.io/ReScue/)
   * SDL Regex Fuzzer
+* OpenJDK 也正在尝试提供更安全的正则引擎，但是至今（JDK 16）还没有结果：[JDK-8260688](https://bugs.openjdk.java.net/browse/JDK-8260688)
 
 ## 3. 实例
 遇到过这样的写法：
