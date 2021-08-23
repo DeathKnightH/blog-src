@@ -132,9 +132,79 @@ ORDER BY age DESC, score;
 先按照 age 倒序排列，age 属性相同时按照 score 正序排列。
 
 * 查询结果分组
+
+使用 `GROUP BY` 子句对结果集进行分组：
+```
+SELECT age, score, count(*) AS sum
+FROM person
+WHERE id < 100
+GROUP BY age, score
+ORDER BY sum;
+```
+
+1、`GROUP BY` 在 `WHERE` 后，`ORDER BY` 前。
+
+2、`SELECT` 子句选择的属性必须在 `GROUP BY` 中出现（除汇总函数外，例如 count(*)）。
+
+3、如果分组的属性在某些记录中为 NULL，则 NULL 会单独分组。
+
+
 * 分页查询
+
+当结果集过大而一次不用使用全部结果集时，可以使用 `LIMIT m OFFSET n` 子句进行手动分页：
+```
+SELECT id, name, age, score
+FROM person
+ORDER BY age DESC, score
+LIMIT 5 OFFSET 0;
+```
+
+每页5条记录，当前取第1页。
+
 * 连接查询
-* 笛卡尔积
+  * 内连接，又称等值连接，只保留两表匹配字段。
+  * 左(外)连接，保留左侧表未匹配字段。
+  * 右(外)连接，保留右侧表未匹配字段。
+  * 全外连接 ，保留所有未匹配字段。
+* 笛卡尔积查询
+
+假设有两张表，记录数分别为 M 和 N，将两张表的记录一一组合形成 M*N 行记录的结果集就是笛卡尔积。
+```
+SELECT * 
+FROM students, classes;
+```
+
+实际应用中要尽量避免使用笛卡尔积，因为查询结果可能会很大，比如两张超过1万条记录的表进行笛卡尔积查询，结果集超过1亿条。
+
 * 组合查询
+
+使用 `UNION` 关键字可以将两个查询结果组合起来，两个查询结果集分别为 M 行和 N 行，则组合结果有 M + N 行。
+
+使用前提是两个查询结果集列一致。
+```
+SELECT name,age,score
+FROM student1
+WHERE age = 10
+UNION
+SELECT name,age,score
+FROM student2
+WHERE age = 18
+ORDER BY score;
+```
+
+组合查询只能有一个 `ORDER BY` 子句，且必须在最后。
+
+默认会去重，如果不去重，需要使用 `UNION ALL` 关键字。
+
+* 子查询
+
+子查询也是查询的一种，结果集只能有 1 列。结果集常用做其他查询的条件/结果的组成部分。
+```
+SELECT *
+FROM student
+WHERE classid IN(SELECT classid
+                  FROM class
+                  WHERE rank > 1)
+```
 
 ## 2. 存储过程
