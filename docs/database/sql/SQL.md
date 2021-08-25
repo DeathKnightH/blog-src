@@ -217,7 +217,7 @@ Stored Program 是一种存储对象，功能和高级语言编写的程序类�
 
 整体的复合语句由 `BEGIN` 开始，`END;` 结束。
 
-特别的，如果使用MySQL客户端命令行编写复合语句，由于 `;` 同时也是客户端的默认分隔符，可以使用 `delimiter` 命令将分隔符先临时改为其他符号，在编写完复合语句后再改回来，例如：
+特别的，如果使用MySQL客户端命令行编写复合语句，由于 `;` 同时也是客户端的默认分隔符，可以使用 `delimiter` 命令将分隔符先临时改为其他符号，在编写完复合语句后再改回来，以包含在存储过程中的复合语句为例：
 ```
 delimiter $
 CREATE PROCEDURE test()
@@ -235,14 +235,71 @@ Stored Function 可以看做用户自定义的函数，创建/修改存储函数
 ```
 CREATE FUNCTION test([param_list])
   RETURN type
-  routine_stmt // 复合语句
+  routine_stmt # 复合语句
 ```
 
 存储函数有且只能有一个返回值。要返回多个值，要么在一个查询语句中调用多个存储函数，要么使用存储过程。
 
+调用存储函数和使用系统内建函数一样（如果和内建函数同名，需要在前面加数据库限定名），直接在表达式中使用。
+
 ### 2.3 存储过程
-Stored procedure 
+Stored procedure 可以看做一组预编译的 SQL 集合，SQL 能做的操作，存储过程基本都能做。
+
+存储过程不包含 RETURN 子句，基本语法如下：
+```
+CREATE FUNCTION test([param_list])
+  routine_stmt # 复合语句
+  
+CALL test([param_list]); # 调用存储过程
+```
+
+存储过程的参数分为3种类型：
+* `IN` 默认类型，传入参数，存储过程可以把这个参数作为变量使用，也可以在过程中修改此参数，但是修改对调用者不可见。
+* `OUT` 传出参数，存储过程可以通过 `SET` 子句赋值给这些变量，而调用者可以在过程返回后，可以使用这些参数获取返回值。
+* `INOUT`顾名思义，同时作为传入和传出参数，类似代码中的引用传递。
+
+与存储函数的区别：
+||返回值|参数|能否修改数据库中的数据|调用方式|
+|---|---|---|---|---|
+|存储函数|用RETURN子句返回，只能有1个返回值|只有 `IN` 参数|不能|直接在表达式中使用，和内建函数一样|
+|存储过程|通过 `OUT` 或 `INOUT` 类型参数返回，可以有多个|可以有 `IN`/`OUT`/`INOUT`等 3 种参数|能|必须使用 `CALL` 子句调用|
 
 ### 2.4 触发器
+Trigger 可以看做和特定表关联的存储过程，其中定义的内容会在执行特定表的 `INSERT`/`DELETE`/`UPDATE` 语句时被自动激活，激活时机可以设置在语句执行前或者执行后。
+
+定义触发器时需要显式指定触发它的语句类型和触发时机，基本语法如下：
+```
+CREATE TRIGGER trigger_test
+  {BEFORE | AFTER}
+  {INSERT | UPDATE | DELETE}
+  ON table_name             # 关联表
+  FOR EACH ROW trigger_stmt # 触发器内容
+```
+
+在触发器内容体内可以使用 `NEW` 限定名代指 `INSERT` 或 `UPDATE` 操作中被插入或修改的新行数据，用 `NEW.column` 表示该行的某一个属性。
+
+相同的，可以使用 `OLD` 限定名代指 `DELETE` 或 `UPDATE` 操作中被删除或修改的旧行数据，用 `OLD.column` 表示该行的某个属性。
+
+需要注意的是触发器的权限属于特定表，需要拥有对应表的 `TRIGGER` 权限才能创建/删除触发器。
 
 ### 2.5 事件
+MySQL 有内置的事件调度器，可以拥有定时执行一系列的数据库操作。默认是不会启用的，要使用事件调度器执行事件需要先设置配置项：
+```
+SET GLOBAL event_scheduler = ON;
+```
+
+事件定义由计划时间和事件内容组成，基本语法如下：
+```
+CREATE EVENT event_name
+  ON SCHEDULE {AT datetime | EVERY expr interval [STARTS datetime] [ENDS datetime]}
+  DO event_stmt
+```
+
+例如，每4小时清理历史记录表中超过一天的记录：
+```
+CREATE EVENT expire_web_history
+  ON SCHEDULE EVERY 4 HOUR
+  DO
+    DELETE FROM web_history
+    WHERE last_visit < CURRENT_TIMESTAMP - INTERVAL 1 DAY;
+```
