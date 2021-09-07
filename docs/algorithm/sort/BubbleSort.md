@@ -31,4 +31,18 @@ while flag
 
 ## 4. Java实现
 ```
+public void bubbleSort(int[] array){
+  boolean sortFlag = true;
+  while(sortFlag){
+    sortFlag = false;
+    for(int i = 0; i < array.length; ++i){
+      if(array[i] > array[i +1]){
+        sortFlag = true;
+        int temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
+      }
+    }
+  }
+}
 ```
