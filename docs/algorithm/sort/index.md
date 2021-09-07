@@ -30,3 +30,4 @@
 ### 2.1 [冒泡排序（Bubble Sort）](./BubbleSort.md)
 ### 2.2 [选择排序（Selection Sort）](./SelectionSort.md)
 ### 2.3 [插入排序（Insertion Sort）](./InsertionSort.md)
+### 2.4 [希尔排序（Shell Sort）](./ShellSort.md)
