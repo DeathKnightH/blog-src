@@ -18,7 +18,33 @@
 |稳定性|不稳定|因为是分组排序的，不能保证相等元素的最终顺序|
 |最坏时间复杂度|O(n^2)|最坏情况间距为1，退化为直接插入排序|
 |最好时间复杂度|O(n)|完全有序的序列只需要扫描一次全序列就可以完成排序|
-|平均时间复杂度|O(n^3/2)|希尔排序的时间复杂度与分组间距有关，通常采用每次间距除以3来计算所以是 n^{3/2}|
+|平均时间复杂度|O(n^3/2)|希尔排序的时间复杂度与分组间距有关，通常采用每次间距除以3来计算所以是 $n^{3/2}$|
 |空间复杂度|O(1)|可以只用 1 个额外空间存储交换时的临时元素，某些特殊情况甚至可以不使用额外空间|
 
 ## 3. Java 实现
+```
+    public void shellSort(int[] array){
+        int n = array.length;
+        int step = 1;
+        while(step < n/3){
+            step = step * 3 + 1;
+        }
+        // 外层循环每次除以3来减少间距直到1
+        while(step >= 1){
+            insertionSort(array, step);
+            step /= 3;
+        }
+    }
+    
+    // 对每个分组进行插入排序
+    private void insertionSort(int[] array, int step){
+        for(int i = step; i < array.length; ++i){
+            int temp = array[i];
+            int j;
+            for(j = i; j >= step && temp < array[j- step]; j -= step){
+                array[j] = array[j- step];
+            }
+            array[j] = temp;
+        }
+    }
+```
