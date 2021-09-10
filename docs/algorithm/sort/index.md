@@ -35,4 +35,4 @@
 ### 2.6 [堆排序（Heap Sort）](./HeapSort.md)
 ### 2.7 [快速排序（Quick Sort）](./QuickSort.md)
 ### 2.8 [计数排序（Counting Sort）](./CountingSort.md)
-### 2.9 [基数排序（Radio Sort）](./RadioSort.md)
+### 2.9 [基数排序（Radix Sort）](./RadixSort.md)
