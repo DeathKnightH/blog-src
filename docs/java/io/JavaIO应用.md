@@ -56,7 +56,14 @@ ZipFile zip = new ZipFile(file);
 
 ### 2.2 按文件类型分
 #### 2.2.1 文本文件
+
+* 逐行读取
+```
+
+```
+
 #### 2.2.2 class
+常用于自定义的 classloader 中。
 #### 2.2.3 XML
 #### 2.2.4 properties
 #### 2.2.5 yml
