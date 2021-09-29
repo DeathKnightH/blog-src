@@ -42,14 +42,34 @@ jdk 7 新引入的文件处理类，在 nio 包下。
 
 ZipFile 读取压缩包，遍历 ZipEntry 读取压缩包内容：
 ```
-ZipFile zip = new ZipFile(file);
-
+    public byte[] readZipFile(String path, String name) throws IOException {
+        try (ZipFile zipFile = new ZipFile(path)) {
+            ZipEntry zipEntry = zipFile.getEntry(name);
+            try (InputStream inputStream = zipFile.getInputStream(zipEntry)) {
+                try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+                    byte[] buffer = new byte[1024];
+                    while(inputStream.read(buffer) != -1){
+                        byteArrayOutputStream.write(buffer);
+                    }
+                    return byteArrayOutputStream.toByteArray();
+                }
+            }
+        }
+    }
 ```
 
 * jdk 1.7 的写法
 
 创建压缩包的 FileSystem，从 FileSystem 中查找需要读取的文件 path，再用 Flies 工具读取：
 ```
+    public byte[] readZipFile7(String path, String name) throws IOException {
+        Path zipFilePath = Paths.get(path);
+        Path completePath;
+        try (FileSystem zipFileSystem = FileSystems.newFileSystem(zipFilePath, this.getClass().getClassLoader())) {
+            completePath = zipFileSystem.getPath(name);
+        }
+        return Files.readAllBytes(completePath);
+    }
 ```
 
 #### 2.1.2 从网络上读
