@@ -25,10 +25,66 @@
 ## 3. 伪代码
 通用场景：
 ```
+public Object[] countingSort(Object[] source){
+  // 先找出最大值和最小值
+  int max = Arrays.stream(source).max(comparator).getAsInt();
+  int min = Arrays.stream(source).min(comparator).getAsInt();
+  int n = max - min + 1;
+  int[] counting = new int[n];      // 构造计数用的数组
+  
+  // 计数
+  for(Object temp : source){
+    counting[temp.key - min] ++;    // 通过与 min 的偏移量在counting数组中计数
+  }
+  
+  // 计算前缀和
+  for(int i = 1; i < n; i ++){
+    counting[i] += counting[i - 1];
+  }
+  
+  // 构造有序的结果序列
+  int[] result = new int[source.length];
+  Arrays.fill(result, inf);         // 数组元素初始化为范围外的值
+  for(int i = 0; i < source.length; i ++){
+    int temp = source[i];
+    int tempIndex = counting[temp - min];
+    if(result[tempIndex] != inf){
+      tempIndex ++;
+    }
+    result[tempIndex] = temp;
+    counting[temp - min] = tempIndex;
+  }
+  
+  return result;
+}
 ```
 
 整形序列场景：
 ```
+public int[] countingSort(int[] source){
+  // 先找出最大值和最小值
+  int max = Arrays.stream(source).max().getAsInt();
+  int min = Arrays.stream(source).min().getAsInt();
+  int n = max - min + 1;
+  int[] counting = new int[n];      // 构造计数用的数组
+  
+  // 计数
+  for(Object temp : source){
+    counting[temp.key - min] ++;    // 通过与 min 的偏移量在counting数组中计数
+  }
+  
+  // 直接根据计数数组输出结果，不需要计算前缀和
+  int[] result = new int[source.length];
+  int currentIndex = 0;
+  for(int i = 0; i < n; i++){
+    int temp = counting[i];
+    while(temp > 0){
+      result[currentIndex] = i;
+      currentIndex ++;
+      temp --;
+    }
+  }
+}
 ```
 
 ## 4. 优化细节
