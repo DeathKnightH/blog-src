@@ -35,3 +35,5 @@
 * 第一遍遍历时可以记录最小值和最大值，并将最小值作为数组的起点，相对 index 为 0，方便构造尽可能小的计数数组。
 
 ## 5. 实例
+* [274.H 指数](https://leetcode-cn.com/problems/h-index/) ，没有实际排序，只是用到了计数排序的思想
+* [912.排序数组](https://leetcode-cn.com/problems/sort-an-array/)
