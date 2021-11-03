@@ -30,5 +30,11 @@ for i <- k down to 1
 ## 4. Java 实现，以十进制整数为例
 十进制整数的关键字基数为 10，内层可以使用计数排序
 ```
-
+public static radixSort(int[] source){
+  int max = Arrays.stream().max().getAsInt();
+  // 按进制划分每次内层排序
+  for(int i = 1; max / i > 0; i *= 10){
+    countingSort(source, i);  // 内层排序时把每个元素除以 i，做计数排序
+  }
+}
 ```
