@@ -7,11 +7,9 @@ Java 8 这项改动仅针对 Oracle-Sun Hotspot 虚拟机，其他虚拟机如 O
 ## 2. 移除了 PermGen Space
 PermGen Space 即 Permanent Generation Space，俗称永久代。
 
-Hotspot 虚拟机中内存区域在 JDK 8 之前存在 3 块区域：新生代、老年代、永久代。
+Hotspot 虚拟机中内存区域在 JDK 8 之前存在 3 块区域：新生代、老年代、永久代。永久代存储的是方法区和各种常量池，但是需要注意 Java 7 开始字符串常量池移到了**堆**中。
 
-JDK 8 移除了永久代，改用 Metaspace 替代。
-
-Metaspace 又称元空间，使用本地内存来存储类元数据，这和 JRockit/J9 类似。
+JDK 8 移除了永久代，改用 Metaspace 替代。Metaspace 又称元空间，使用本地内存来存储类元数据，这和 JRockit/J9 类似。需要注意 Java 8 的 Hotspot 字符串常量池依旧在**堆**中。
 
 ## 3. 虚拟机参数修改
 - 移除了 PermGen 相关参数：
