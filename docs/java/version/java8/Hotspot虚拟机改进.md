@@ -2,7 +2,7 @@
 ## 1. 仅针对 Hotspot 虚拟机
 Oracle-Sun Hotspot 虚拟机是应用范围最广的虚拟机，是 OracleJDK 和 OpenJDK 中默认的 jvm。
 
-Java 8 这项改动仅针对 Oracle-Sun Hotspot 虚拟机，其他虚拟机如 Oralce JRockit， IBM J9 没有影响。
+Java 8 这项改动仅针对 Oracle-Sun Hotspot 虚拟机，其他虚拟机如 Oralce JRockit(被 Oracle收购后已停止发展，停留在 JDK 1.6)， IBM J9 没有影响。
 
 ## 2. 移除了 PermGen Space
 PermGen Space 即 Permanent Generation Space，俗称永久代。
