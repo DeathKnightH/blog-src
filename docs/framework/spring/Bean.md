@@ -28,7 +28,8 @@ public Person personPrototype() {
 ## 3. 生命周期
 这部分只针对 `singleton` 作用域的 bean，其他作用域 spring 只负责创建 bean。
 
-以这个经典的生命周期图为主线：
+以这个经典的生命周期图为主线描述：
+![image](https://user-images.githubusercontent.com/19852729/143600298-4d3491aa-8641-4a44-8bf6-9be4fbc9215a.png)
 
 ## 4. 单例 bean 的线程安全问题
 因为 bean 在 IOC 中默认是全局单例的，在多线程应用中会有线程安全问题。一般开发中会采用如下方法解决：
