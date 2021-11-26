@@ -31,6 +31,19 @@ public Person personPrototype() {
 以这个经典的生命周期图为主线描述：
 ![image](https://user-images.githubusercontent.com/19852729/143600298-4d3491aa-8641-4a44-8bf6-9be4fbc9215a.png)
 
+1. Instantiate:
+   * 容器查找配置中的 bean 配置。
+   * 容器利用反射 API 创建一个 bean 实例。
+2. Populate properties:
+   * 如果配置涉及属性值，调用 `set()` 方法设置属性值。
+3. BeanNameAware's setBeanName():
+   * 如果 bean 实现了 `BeanNameAware` 接口，就调用 `setBeanName()` 方法设置 bean 的名称。
+4. BeanFactoryAware's setBeanFactory():
+   * 如果 bean 实现了 `BeanFactoryAware` 接口，就调用 `setBeanFactory()` 方法设置
+5. ApplicationContextAware's setApplicationContext():
+
+
+
 ## 4. 单例 bean 的线程安全问题
 因为 bean 在 IOC 中默认是全局单例的，在多线程应用中会有线程安全问题。一般开发中会采用如下方法解决：
 * 使用单例 bean 时尽量保证无状态（即不声明实例变量）。
