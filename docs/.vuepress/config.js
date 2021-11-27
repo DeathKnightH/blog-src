@@ -11,8 +11,10 @@ module.exports = {
             {text: 'Java基础', 
              items: [
                  {text: '总览', link: '/java/'},
-                 {text: '多线程', link: '/java/thread/'}
+                 {text: '多线程', link: '/java/thread/'},
+                 {text: 'JVM', link: '/java/jvm/'}
                 ]},
+            {text: '数据库', link: '/database/'},
             {text: '常用工具', link: '/tools/'}
         ],
         sidebar: 'auto',
