@@ -103,7 +103,7 @@ RejectedExecutionHandler handler	// 拒绝策略
 
 假设核心线程数为`n`，最大线程数为 `max`：
 
-![image-20210711111306283](threadpool.assets/image-20210711111306283.png)
+![image-20210711111306283](./threadpool.assets/image-20210711111306283.png)
 
 
 
@@ -126,7 +126,7 @@ private final HashSet<Worker> workers = new HashSet<Worker>(); 				// worker 线
   
   状态转移流程如下图：
   
-  ![image-20210711144308678](threadpool.assets/image-20210711144308678.png)
+  ![image-20210711144308678](./threadpool.assets/image-20210711144308678.png)
   
 * worker 线程
 
@@ -136,7 +136,7 @@ private final HashSet<Worker> workers = new HashSet<Worker>(); 				// worker 线
 
 * 提交任务时
 
-  ![image-20210711161037180](threadpool.assets/image-20210711161037180.png)
+  ![image-20210711161037180](./threadpool.assets/image-20210711161037180.png)
 
   
 
