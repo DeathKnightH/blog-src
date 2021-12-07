@@ -102,3 +102,65 @@ public class SimpleClassByteCodeTest {
 
 ## 8. 字段表（fields）
 接口索引后紧跟的是字段表区域，这一区域也是不定长的，总体分为两个部分，字段表计数器和字段表数据区：
+
+![fieldconstruct](../../resource/java/fieldsconstruct.drawio.png)
+
+最后的属性表会出现在很多地方，就留到最后和文件的属性表一起分析。
+
+### 8.1 字段修饰符（access_flags）
+和类的访问标志类似，也是一个 2 字节的数据，通过不同标志的位或（|）来计算最终值，标志值和含义如下表所示：
+|标志名称|值|含义|
+|---|---|---|
+|ACC_PUBLIC|0x0001| 是否为 public|
+|ACC_PRIVATE|0x0002| 是否为 private|
+|ACC_PROTECTED|0x0004| 是否为 protected|
+|ACC_STATIC|0x0008| 是否为 static|
+|ACC_FINAL|0x0010| 是否为 final|
+|ACC_VOLATILE|0x0040| 是否为 volatile|
+|ACC_TRANSIENTE|0x0080| 是否是 transient|
+|ACC_SYNTHETIC|0x1000| 有这个标志表示此字段不是由用户代码产生而是编译器自动生成的|
+|ACC_ENUM|0x4000|是否是一个枚举类型|
+
+### 8.2 字段名称（name_index）
+字段修饰符后紧跟的 2 个字节为字段名称索引，这里索引值指向的是该字段在常量池中对应的简单名称。
+
+简单名称指没有类型和参数修饰的名称，比如本文示例代码类中第一个字段的简单名称为 `valueA`。
+
+### 8.3 描述符（descriptor_index）
+字段名称后紧跟的 2 个字节为描述符索引，这里索引值指向的是该描述符在常量池中对应的标识字符。根据类型不同，分为以下 11 类：
+|标识字符|含义|
+|---|---|
+|B|基本类型 btye|
+|C|基本类型 char|
+|D|基本类型 double|
+|F|基本类型 float|
+|I|基本类型 int|
+|J|基本类型 long|
+|S|基本类型 short|
+|Z|基本类型 boolean|
+|V|特殊类型 void|
+|L|对象类型，后面跟类全限定名，如 Ljava/lang/Object|
+|\[|数组类型，几维数组就有几个 `[`，后面再跟数组元素的标识字符，如 `int[][]` 类型就是 `[[I`|
+
+## 9. 方法表（methods）
+字段表后紧跟着方法表，也是不定长，由两部分组成，方法计数器和方法表数据区：
+
+![methodconstruct](../../resource/java/methodsconstruct.drawio.png)
+
+最后的属性表会出现在很多地方，就留到最后和文件的属性表一起分析。
+### 9.1 权限修饰符（access_flags）
+和类的访问标志及字段权限修饰符类似，也是一个 2 字节的数据，通过不同标志的位或（|）来计算最终值，标志值和含义如下表所示：
+|标志名称|值|含义|
+|---|---|---|
+|ACC_PUBLIC|0x0001| 是否为 public|
+|ACC_PRIVATE|0x0002| 是否为 private|
+|ACC_PROTECTED|0x0004| 是否为 protected|
+|ACC_STATIC|0x0008| 是否为 static|
+|ACC_FINAL|0x0010| 是否为 final|
+|ACC_SYNCHRONIZED|0x0020| 是否为 synchronized|
+|ACC_BRIDGE|0x0040| 是否为编译器产生的桥接方法|
+|ACC_VARARGS|0x0080| 方法是否接受不定参数|
+|ACC_NATIVE|0x0100| 是否是 native|
+|ACC_ABSTRACT|0x0400| 是否是 abstract|
+|ACC_STRICTFP|0x0800| 是否是 strictfp|
+|ACC_SYNTHETIC|0x1000| 有这个标志表示此方法不是由用户代码产生而是编译器自动生成的|
