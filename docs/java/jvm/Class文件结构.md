@@ -183,3 +183,11 @@ public class SimpleClassByteCodeTest {
 JDK 8 的虚拟机规范中预定义了 23 种属性。这里只分析最重要的 `Code` 属性。
 
 ### 10.1 Code
+`Code` 区位于方法表的数据区，是方法表的属性之一，里面存储的是源代码编译后对应的JVM指令，其他字节码增强工具提供的字节码增强能力主要就是针对的 `Code` 区。
+
+`Code` 区里还有两个属性：
+#### 10.1.1 LineNumberTable
+行号表，将 Code 区的指令码和源代码中的行号对应，在 Debug 时很有作用。
+
+#### 10.1.2 LocalVariableTable
+本地变量表，包含 this（非 static 方法才有）和局部变量，非 static 方法的本地变量表第一个就是当前实例的引用 `This`，所以可以在任何实例方法中使用 `This` 变量。
