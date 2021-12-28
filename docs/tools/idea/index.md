@@ -21,4 +21,6 @@
 
 字节码查看工具。
 
-* 
+* Maven Helper
+
+可以更直观地查看依赖树，打开工程的 pom 文件，在编辑视窗的左下角选择 `Dependency Analyzer`。
