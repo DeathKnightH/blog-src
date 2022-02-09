@@ -63,7 +63,7 @@ public static void unpark(Thread thread);
 ### 2.1 使用 park/unpark 实现线程同步
 
 ### 2.2 中断响应
-中断线程后，会退出阻塞。
+中断线程后，会退出阻塞。即当线程设置为 interrupt 后会退出阻塞，效果和调用 unpark() 一致。
 
 ## 3. wait()/notify()、park()/unpark()、sleep() 比较
 ### 3.1 阻塞/挂起
@@ -80,4 +80,4 @@ public static void unpark(Thread thread);
 |---|---|---|---|---|---|
 |notify()|唤醒挂起在指定 Object 上的线程|如果挂起的有多个线程，那么随机唤醒一个|Object 类|不带参数|需要在 wait() 之后执行，否则会抛出 IllegalMonitorStateException|
 |notifyAll()|唤醒挂起在指定 Object 上的所有线程|唤醒所有挂起在 Object 上的所有线程|Object 类|不带参数|需要在 wait() 之后执行，否则会抛出 IllegalMonitorStateException|
-|unpark()|如果指定线程在 park 状态则取消阻塞状态，如果指定线程不在 park 状态则使下一次该线程的 park() 调用不会阻塞线程|LockSupport 类|参数为需要 unpark 的线程对象|无限制，任何地方都能用|
+|unpark()|使指定线程许可可用|如果指定线程在 park 状态则取消阻塞状态，如果指定线程不在 park 状态则使下一次该线程的 park() 调用不会阻塞线程|LockSupport 类|参数为需要 unpark 的线程对象|无限制，但如果线程未启动，则 unpark() 不会生效|
