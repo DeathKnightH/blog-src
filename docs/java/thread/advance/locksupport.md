@@ -64,3 +64,20 @@ public static void unpark(Thread thread);
 
 ### 2.2 中断响应
 中断线程后，会退出阻塞。
+
+## 3. wait()/notify()、park()/unpark()、sleep() 比较
+### 3.1 阻塞/挂起
+|方法|线程操作|是否释放锁|方法所属类/接口|参数|使用限制|异常|
+|---|---|---|---|---|---|---|
+|wait()|挂起当前线程|是|属于 Object 类，即 java 所有对象都有这个方法|1.不带参数，需要手动调用 notify() 唤醒 2.带时间参数，可以超时自动唤醒|只能在同步块中使用|抛出 InterruptedException|
+|park()|阻塞当前线程|否|属于 LockSupport 类，但是因为是public static 方法，所以可以在任何类中使用|1.不带参数 2.带 blocker 参数|无限制，任何地方都能使用|无|
+|parkNanos()|阻塞当前线程|否|属于 LockSupport 类，是 park() 方法的带超时时间版本|两个参数，blocker 对象和超时时间(ns)|无限制，任何地方都能使用|无|
+|parkUntil()|阻塞当前线程|否|属于 LockSupport 类，是 park() 方法的带指定时间版本|两个参数，blocker 对象和指定唤醒时间(ns)|无限制，任何地方都能使用|无|
+|sleep()|阻塞指定线程|否|属于 Thread 类，如果阻塞当前线程直接调用即可|必须至少带一个参数，超时时间(millis)，或者额外加第二个参数，更小单位的超时时间(ns)|只能对 Thread 对象使用|抛出 InterruptedException|
+
+### 3.2 唤醒
+|方法|线程操作|特性|方法所属类/接口|参数|使用限制|
+|---|---|---|---|---|---|
+|notify()|唤醒挂起在指定 Object 上的线程|如果挂起的有多个线程，那么随机唤醒一个|Object 类|不带参数|需要在 wait() 之后执行，否则会抛出 IllegalMonitorStateException|
+|notifyAll()|唤醒挂起在指定 Object 上的所有线程|唤醒所有挂起在 Object 上的所有线程|Object 类|不带参数|需要在 wait() 之后执行，否则会抛出 IllegalMonitorStateException|
+|unpark()|如果指定线程在 park 状态则取消阻塞状态，如果指定线程不在 park 状态则使下一次该线程的 park() 调用不会阻塞线程|LockSupport 类|参数为需要 unpark 的线程对象|无限制，任何地方都能用|
