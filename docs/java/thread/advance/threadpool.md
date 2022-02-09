@@ -150,6 +150,8 @@ private final HashSet<Worker> workers = new HashSet<Worker>(); 				// worker 线
   * 返回true，表示 `Worker` 处于空闲状态。
 
   然后判断线程池状态，如果此时线程池为 STOP 状态，就马上中断当前 worker 线程；否则就开始执行 task。
+  
+  执行 task 其实就是直接调用 task.run()，因为当前已经是 worker 线程，所以相当于是 worker 线程在执行 task 线程的功能，这也就是线程池复用线程资源的体现。
 
   task 执行完毕后调用 `unlock()`解锁，此时`Worker` 又回到了空闲状态。
 
