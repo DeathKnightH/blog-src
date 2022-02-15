@@ -15,7 +15,11 @@ module.exports = {
                  {text: 'JVM', link: '/java/jvm/'}
                 ]},
             {text: '数据库', link: '/database/'},
-            {text: '常用工具', link: '/tools/'}
+            {text: '常用工具', link: '/tools/'},
+            {text: '设计',
+             items: [
+                 {text: '设计模式', link: '/design/design_patterns/'}
+                ]}
         ],
         sidebar: 'auto',
         sidebarDepth: 2,
