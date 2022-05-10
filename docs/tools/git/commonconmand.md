@@ -8,7 +8,7 @@ git diff-tree -r --no-commit-id --name-only 84bbab17 234910f1 | xargs tar -rf fi
 ```
 
 ## 输出修改文件清单
-可以输出一次提交的清单，例如 commit 1 的 id 为 84bbab17：
+可以输出某次提交至当前分支 head 的清单，例如 commit 1 的 id 为 84bbab17，输出 commit 1 到当前 head 的修改清单：
 ```
 git diff --name-only 84bbab17
 ```
