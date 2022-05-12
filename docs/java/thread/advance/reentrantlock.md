@@ -11,4 +11,7 @@ ReentrantLock 没有直接继承 AbstractQueuedSynchronizer，而是通过组合
 ### 2.2 unlock()
 
 ## 3. 使用示例
+* 使用 ReentrantLock 的 condition 特性实现多条件等待
+
+
 [配合 condition 使用的示例](https://leetcode.cn/problems/design-bounded-blocking-queue/)
