@@ -154,9 +154,14 @@ java.util.concurrent 包下提供了很多基于 AQS 实现的同步器，日常
 * 使用了 AQS 父类 `AbstractOwnableSynchronizer` 存储当前锁的 owner，便于重入
 
 ReentrantLock 获取锁的流程如下：
+
 ![ReentrantLock](../../../resource/java/ReentrantLock_tryAcquire.png)
 
 ### 3.2 CountDownLatch
+* 用 state 保存当前计数值
+* `countDown` 方法调用 `releaseShared(1)`，state 减 1
+* `await` 方法调用 `acquireSharedInterruptibly(1)`，判断 state 值，等于 0 就返回，否则进入 `doAcquireSharedInterruptibly` 方法中循环等待
+
 ### 3.3 Semaphore
 ### 3.4 CyclicBarrier
 
