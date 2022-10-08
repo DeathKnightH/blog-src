@@ -163,7 +163,19 @@ ReentrantLock 获取锁的流程如下：
 * `await` 方法调用 `acquireSharedInterruptibly(1)`，判断 state 值，等于 0 就返回，否则进入 `doAcquireSharedInterruptibly` 方法中循环等待
 
 ### 3.3 Semaphore
+* 用 state 保存当前许可的数量
+* 内部实现了两个 AQS，一个公平版本，一个非公平版本
+* 每个 AQS 都实现了 `tryAcquireShared` 方法，内部使用 `compareAndSetState` 方法降低许可数量，返回降低后的许可数量
+* 对外的 `acquire` 方法调用了 AQS 的 `acquireSharedInterruptibly`，当 `tryAcquireShared` 方法返回负数时，会进入`doAcquireSharedInterruptibly` 方法中循环等待，这就对应许可数量不够而调用 `acquire` 方法的线程会阻塞
+
 ### 3.4 CyclicBarrier
+* 内部包含了一个 `ReentrantLock` 和一个 `Condition`，这两个同步器的底层实现都是 AQS
+* `CyclicBarrier` 触发执行后或者调用 `breakBarrier` 破坏屏障后，`CyclicBarrier` 都会恢复初始的可用状态，重新接受 `await`
+* 当某次 `await` 进入后，index 为 0，则用当前线程执行 `barrierAction`，然后调用 `nextGeneration` 唤醒等待在 `Condition` 上的所有线程并重置 `CyclicBarrier` 状态
+
+`dowait` 流程：
+
+![CyclicBarrier](../../../resource/java/CyclicBarrier_dowait.png)
 
 ## 4. 自定义同步器
 AQS 采用**模板方法**模式设计，acquire()/release() 等 public 方法都是 final 的，对子类开放了一些 protected 方法，供子类修改实现。
