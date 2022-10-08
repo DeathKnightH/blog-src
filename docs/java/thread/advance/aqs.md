@@ -148,6 +148,14 @@ public final boolean releaseShared(int arg) {
 ## 3. 实际应用
 java.util.concurrent 包下提供了很多基于 AQS 实现的同步器，日常开发使用这些同步器就够用
 ### 3.1 ReentrantLock
+* 只支持独占方式获取操作
+* 内部实现了两个 AQS，一个公平锁版本，一个非公平锁版本
+* 每个 AQS 都实现了 `tryAcquire`/`tryRelease`/`isHeldExclusively` 3 个方法
+* 使用了 AQS 父类 `AbstractOwnableSynchronizer` 存储当前锁的 owner，便于重入
+
+ReentrantLock 获取锁的流程如下：
+![ReentrantLock](../../../resource/java/ReentrantLock_tryAcquire.png)
+
 ### 3.2 CountDownLatch
 ### 3.3 Semaphore
 ### 3.4 CyclicBarrier
