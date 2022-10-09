@@ -68,5 +68,17 @@ pb.start()
 * 后台对更改数据的请求限定为 post，并对 post 请求进行过滤，校验 CRSFToken
 
 ## 4.安全加密算法
+常用举例
+||安全|非安全|
+|---|---|---|
+|对称加密|AES-GCM（>= 128bit）|AES-CBC,任意 AES（<128bit）|
+|非对称加密|RSA(>=3072bit)|RSA(<2048bit)|
+|摘要算法|SHA256|MD5/SHA1|
 
 ## 5.安全随机数
+java 中 `java.util.Random` 使用了 LGC 算法，可以很容易通过随机数推算出种子，进而预测出下一个随机数。不适用安全性要求高的场景，如加解密。
+
+安全性要求高的场景，使用安全随机数 `java.Security.SecureRandom`：
+```
+SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+```
