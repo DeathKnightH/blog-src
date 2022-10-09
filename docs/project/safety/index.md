@@ -43,8 +43,29 @@ pb.start()
 * 如果一定要使用外部输入作为命令，那就转义/校验所有的命令行元字符，例如 shell 就校验 `#&;`,|*?~<>^()[]{}$\`
 
 ## 2.XSS
+跨站脚本攻击(Cross Site Scripting)，外部输入文本时携带了js脚本内容，让网页在客户端渲染时执行了恶意脚本。
+
+危害比 CRSF 还要大，XSS 甚至可以盗用 cookie
+
+解决思路：
+* 对用户输入文本在存储和显示进行编码，转义相关特殊字符，例如 java 中可以使用 org.springframework.web.util.HtmlUtils#htmlEscape(java.lang.String, java.lang.String)
+* 使用 Content Security Policy 策略配置，可以限制下载资源来源。
+ * 在 http headers 中添加如下配置，限制资源只能来自于本站：
+ ```
+ Content-Security-Policy: default-src 'self'
+ ```
+* 防止盗用 cookie
+ * 设置 http-only
+ * 设置 cookie 有效期
 
 ## 3.CRSF
+跨站请求伪造(Cross-site request forgery)，通过在外站链接伪造为本站链接，借用存储在用户客户端本地的 cookie 伪装成用户通过链接发送请求。
+
+解决思路：
+* 为本站的请求添加 CRSFToken，不存储在 cookie 中
+ * 可以添加到 request 参数中
+ * 也可以添加到 httpheaders 中
+* 后台对更改数据的请求限定为 post，并对 post 请求进行过滤，校验 CRSFToken
 
 ## 4.安全加密算法
 
